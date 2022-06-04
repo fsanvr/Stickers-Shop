@@ -1,0 +1,42 @@
+{% extends 'shop/base.html' %}
+
+
+{% block title.super %}
+    | {{ user.username }}
+{% endblock %}
+
+
+{% block content %}
+
+    {% for sticker in stickers %}
+    <div class="par">
+        <div class="par">
+            {{ sticker.name }}
+        </div>
+        <div class="par">
+            {{ sticker.price }}
+        </div>
+        <div class="par">
+            {{ sticker.image }}
+        </div>
+        <div class="par">
+            {{ sticker.size }}
+        </div>
+        <div class="par">
+            {{ sticker.user }}
+        </div>
+    </div>
+    {% endfor %}
+
+
+<form name='profile' action="{% url 'profile' %}" method="post" class="form-input" enctype="multipart/form-data">
+    {% csrf_token %}
+
+    {% if error_message %}
+        {{ error_message }}
+    {% endif %}
+    
+    {{ form }}
+    <button type='submit'>Add sticker</button>
+</form>
+{% endblock %}

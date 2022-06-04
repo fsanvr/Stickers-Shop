@@ -1,0 +1,25 @@
+{% extends 'shop/base.html' %}
+
+
+{% block title %}
+    | register
+{% endblock %}
+
+
+{% block content %}
+<form name='login' action="{% url 'login' %}" method="post" class="form-input">
+    {% csrf_token %}
+
+    {% if error_message %}
+        {{ error_message }}
+    {% endif %}
+    
+    {{ form }}
+    <button type='submit'>Регистрация</button>
+</form>
+{% endblock %}
+
+
+{% block scripts %}
+    
+{% endblock %}
