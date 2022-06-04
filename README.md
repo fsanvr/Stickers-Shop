@@ -1,1 +1,3 @@
 # stickers--site
+
+django site
