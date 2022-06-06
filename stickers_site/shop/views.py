@@ -1,10 +1,15 @@
-from re import template
-from django.shortcuts import render
+#from re import template
+#from django.shortcuts import render
+import imp
 from django.template import loader
 from django.http import HttpResponse, HttpResponseRedirect
 from django.urls import reverse
 from django.contrib.auth import login, logout
 from django.contrib.auth.decorators import login_required
+
+from PIL import Image
+
+from stickers_site.settings import MEDIA_ROOT
 
 from .models import *
 from .forms import *
@@ -89,7 +94,7 @@ def profile(request):
     context = {}
     
     if request.method == 'POST':
-        form = CreateStickerForm(data=request.POST, files=request.FILES)
+        form = CreateStickerForm(data=request.POST, files=request.FILES['file'])
         form.instance.user = request.user
         if form.is_valid():
             form.save()
@@ -101,8 +106,6 @@ def profile(request):
 
 
     context['stickers'] = Stickers.objects.filter(user=request.user)
-    print(context['stickers'])
     context['form'] = CreateStickerForm()
 
     return HttpResponse(template.render(context, request))
-        

@@ -1,7 +1,7 @@
-from distutils.command.upload import upload
-from unicodedata import name
 from django.db import models
 from django.contrib.auth.models import User
+
+from stickers_site.settings import MEDIA_ROOT
 
 # Create your models here.
 
@@ -18,6 +18,6 @@ from django.contrib.auth.models import User
 class Stickers(models.Model):
     name = models.CharField(max_length=30)
     price = models.IntegerField()
-    image = models.ImageField()
+    image = models.ImageField(upload_to='images')
     size = models.CharField(max_length=30)
     user = models.ForeignKey(User, on_delete=models.CASCADE, blank=True)

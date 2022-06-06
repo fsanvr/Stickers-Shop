@@ -1,5 +1,5 @@
 {% extends 'shop/base.html' %}
-
+{% load static %}
 
 {% block title.super %}
     | {{ user.username }}
@@ -17,7 +17,7 @@
             {{ sticker.price }}
         </div>
         <div class="par">
-            {{ sticker.image }}
+            <img src="{{ sticker.image.url }}" />
         </div>
         <div class="par">
             {{ sticker.size }}

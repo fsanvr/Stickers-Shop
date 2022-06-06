@@ -49,7 +49,8 @@ class CreateStickerForm(forms.ModelForm):
     )
     image = forms.ImageField(
         label='image',
-        widget=forms.FileInput(attrs={'class': 'form-control'})
+        widget=forms.FileInput(attrs={'class': 'form-control'}),
+        
     )
     size = forms.CharField(
         label='size',
