@@ -1,3 +1,3 @@
 # stickers--site
 
-django site
+django + sqlite
