@@ -1,5 +1,4 @@
 {% extends 'shop/base.html' %}
-{% load static %}
 
 {% block title.super %}
     | {{ user.username }}
@@ -25,6 +24,12 @@
         <div class="par">
             {{ sticker.user }}
         </div>
+        <form class="par" action="{% url 'profile' %}" method="post">
+            {% csrf_token %}
+            <input name="_method" value="DELETE" hidden/>
+            <input name="sticker_id" value="{{ sticker.id }}" hidden/>
+            <button type='submit'>Удалить стикер</button>
+        </form>
     </div>
     {% endfor %}
 
@@ -35,7 +40,7 @@
     {% if error_message %}
         {{ error_message }}
     {% endif %}
-    
+    <input name="_method" value="POST" hidden/>
     {{ form }}
     <button type='submit'>Add sticker</button>
 </form>

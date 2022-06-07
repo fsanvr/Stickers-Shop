@@ -1,7 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 
-from stickers_site.settings import MEDIA_ROOT
+#from stickers_site.settings import MEDIA_ROOT
 
 # Create your models here.
 

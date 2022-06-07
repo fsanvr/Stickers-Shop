@@ -1,15 +1,12 @@
 #from re import template
 #from django.shortcuts import render
-import imp
+import os
 from django.template import loader
 from django.http import HttpResponse, HttpResponseRedirect
 from django.urls import reverse
 from django.contrib.auth import login, logout
 from django.contrib.auth.decorators import login_required
 
-from PIL import Image
-
-from stickers_site.settings import MEDIA_ROOT
 
 from .models import *
 from .forms import *
@@ -19,9 +16,9 @@ from .forms import *
 def index(request):
     #print(request)
     template = loader.get_template('shop/index.html')
-    context = {
+    context = {}
 
-    }
+    context['stickers'] = Stickers.objects.all()
     return HttpResponse(template.render(context, request))
 
 
@@ -75,26 +72,13 @@ def register(request):
     return HttpResponse(template.render(context, request))
 
 
-#@login_required
-#def profile(request):
-#    template = loader.get_template('shop/profile.html')
-#    context = {}
-#
-#    stickers = Stickers.objects.filter(username=request.user.username)
-#    context['items'] = stickers
-#    form = CreateStickerForm()
-#    context['form'] = form
-#
-#    return HttpResponse(template.render(context, request))
-
-
 @login_required
 def profile(request):
     template = loader.get_template('shop/profile.html')
     context = {}
     
-    if request.method == 'POST':
-        form = CreateStickerForm(data=request.POST, files=request.FILES['file'])
+    if request.method == 'POST' and request.POST['_method'] == 'POST':
+        form = CreateStickerForm(data=request.POST, files=request.FILES)
         form.instance.user = request.user
         if form.is_valid():
             form.save()
@@ -103,6 +87,20 @@ def profile(request):
         else:
             context['error_message'] = form.errors
             print(form.errors)
+
+    
+    elif request.method == 'POST' and request.POST['_method'] == 'DELETE':
+        id = request.POST['sticker_id']
+        sticker = (Stickers.objects.filter(pk=id).all())[0]
+        
+        print(sticker.image.path)
+        try:
+            os.remove(sticker.image.path)
+            Stickers.objects.filter(pk=id).delete()
+            print('TRY')
+            return HttpResponseRedirect(reverse('profile'))
+        except:
+            print('FAIL DELETE')
 
 
     context['stickers'] = Stickers.objects.filter(user=request.user)

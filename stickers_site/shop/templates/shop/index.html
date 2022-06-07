@@ -12,19 +12,23 @@
         зарегистрироваться и купить чужие стикеры / продать свои.
     </div>
 
+    {% for sticker in stickers %}
     <div class="par">
-        СТИКЕРЫ СТИКЕРЫ СТИКЕРЫ
+        <div class="par">
+            {{ sticker.name }}
+        </div>
+        <div class="par">
+            {{ sticker.price }}
+        </div>
+        <div class="par">
+            <img src="{{ sticker.image.url }}" />
+        </div>
+        <div class="par">
+            {{ sticker.size }}
+        </div>
+        <div class="par">
+            {{ sticker.user }}
+        </div>
     </div>
-    <div class="par">
-        СТИКЕРЫ СТИКЕРЫ СТИКЕРЫ
-    </div>
-    <div class="par">
-        СТИКЕРЫ СТИКЕРЫ СТИКЕРЫ
-    </div>
-    <div class="par">
-        СТИКЕРЫ СТИКЕРЫ СТИКЕРЫ
-    </div>
-    <div class="par">
-        СТИКЕРЫ СТИКЕРЫ СТИКЕРЫ
-    </div>
+    {% endfor %}
 {% endblock %}
