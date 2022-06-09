@@ -1,7 +1,3 @@
-a, a:visited, a:hover{
-    color:#E9E9E9;
-    text-decoration: none;
-}
 * {
 	margin: 0;
 	padding: 0;
@@ -14,7 +10,7 @@ a, a:visited, a:hover{
         'content'
         'footer';
 	min-height: 100vh;
-    grid-template-rows: 6% minmax(0, 6%) 1fr 6%;
+    grid-template-rows: minmax(50px, auto) auto 1fr minmax(50px, auto);
 
     font-family: 'Comic Sans MS', Verdana, sans-serif;
 }
@@ -48,11 +44,6 @@ a, a:visited, a:hover{
     text-align: center;
 }
 
-
-
-h1, h2 ,h3, h4, h5, h6, p, .par{
-    color: #E9E9E9;
-}
 
 .header-url, .footer-url, .form-input{
     display: grid;
@@ -109,35 +100,64 @@ body{
     justify-content: end;
     padding-right: 5px;
 }
+button{
+    border: none;
+    background: none;
+    font-weight: 999;
+    font-size: calc(14px + (100vw - 320px) / (1920-320));
+}
+input{
+    border-width: 3px;
+}
 
 
 /*
 ############-----COLORS-----############
 */
 .wrapper{
-    background-color: #4F87A2;
+    background-color: #D2BEBF;
 }
 .header{
-    background-color: #223542;
+    background-color: #049CB3;
 }
 .header-url{
     background-color:none;
 }
 .user{
-    background-color: #2B506E;
+    background-color: #AFA7B2;
 }
 .content{
-    background-color: #4F87A2;
+    background-color: #D2BEBF;
 }
 .form-input{
-    background-color:rgb(138, 51, 159);
+    /*background-color:rgb(138, 51, 159);*/
 }
 .footer{
-    background-color: #2B506E;
+    background-color: #049CB3;
 }
 .footer-url{
     background-color:none;
 }
 .card{
-    background-color:brown;
+    background-color:#049CB3;
+}
+a, a:visited, a:hover{
+    color: #213341;
+    text-decoration: none;
+}
+.par, .form-control{
+    color: #213341;
+}
+.logo{
+    color: #213341;
+}
+label{
+    color: #213341;
+}
+button:hover, a:hover{
+    color: #D2BEBF;
+}
+input{
+    background-color: #F5E7E4;
+    border-color: #213341;
 }

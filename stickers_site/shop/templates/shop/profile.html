@@ -6,7 +6,7 @@
 
 
 {% block user %}
-    <a href="/profile/{{ username }}" class="">{{ username }}</a>
+    <a href="/profile/{{ username }}" class="par">{{ username }}</a>
 {% endblock %}
 
 {% block content %}
@@ -29,7 +29,7 @@
             {% csrf_token %}
             <input name="_method" value="DELETE" hidden/>
             <input name="sticker_id" value="{{ sticker.id }}" hidden/>
-            <button type='submit'>Удалить стикер</button>
+            <button type='submit' class="par">Удалить стикер</button>
         </form>
         {% endif %}
     </div>
@@ -45,7 +45,7 @@
                 {% endif %}
                 <input name="_method" value="POST" hidden/>
                 {{ form }}
-                <button type='submit'>Add sticker</button>
+                <button type='submit' class="par">Add sticker</button>
             </form>
         </div>
     {% endif %}

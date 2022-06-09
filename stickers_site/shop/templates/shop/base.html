@@ -18,15 +18,15 @@
     <div class="wrapper">
 
         <div class="header">
-            <a href="/" class="logo header-url"><h2>StickerShop</h2></a>
+            <a href="/" class="par header-url"><h2 class="logo">StickerShop</h2></a>
 
             {% block header_url %}
                 {% if user.is_authenticated %}
-                    <a href="/logout" class="header-url">Log out</a>
-                    <a href="/profile" class="header-url">Profile</a>
+                    <a href="/logout" class="par header-url">Log out</a>
+                    <a href="/profile" class="par header-url">Profile</a>
                 {% else %}
-                    <a href="/login" class="header-url">Log in</a>
-                    <a href="/register" class="header-url">Reg</a>
+                    <a href="/login" class="par header-url">Log in</a>
+                    <a href="/register" class="par header-url">Reg</a>
                 {% endif %}
 
             {% endblock %}
@@ -48,9 +48,9 @@
         <footer class="footer">
 
             {% block footer_url %}
-            <a href="/about" class="footer-url">О нас</a>
-            <a href="/contact" class="footer-url">Обратная связь</a>
-            <a href="https://github.com/fs-anvr/stickers--site" class="footer-url">Проект на Github</a>
+            <a href="/about" class="par footer-url">О нас</a>
+            <a href="/contact" class="par footer-url">Обратная связь</a>
+            <a href="https://github.com/fs-anvr/stickers--site" class="par footer-url">Проект на Github</a>
             {% endblock %}
             
 
