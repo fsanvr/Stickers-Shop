@@ -5,43 +5,48 @@
 {% endblock %}
 
 
-{% block content %}
+{% block user %}
+    <a href="/profile/{{ username }}" class="">{{ username }}</a>
+{% endblock %}
 
+{% block content %}
     {% for sticker in stickers %}
-    <div class="par">
-        <div class="par">
-            {{ sticker.name }}
-        </div>
-        <div class="par">
-            {{ sticker.price }}
-        </div>
-        <div class="par">
+    <div class="card">
+        <div class="case_img">
             <img src="{{ sticker.image.url }}" />
         </div>
-        <div class="par">
-            {{ sticker.size }}
+        <div class="par card-title">
+            {{ sticker.name }}
         </div>
-        <div class="par">
-            {{ sticker.user }}
+        <div class="par card-price">
+            {{ sticker.price }} руб
         </div>
+        <div class="par card-name">
+            <a href="/profile/{{ sticker.user }}" class="">{{ sticker.user }}</a>
+        </div>
+        {% if user.is_authenticated and user.username == username %}
         <form class="par" action="{% url 'profile' %}" method="post">
             {% csrf_token %}
             <input name="_method" value="DELETE" hidden/>
             <input name="sticker_id" value="{{ sticker.id }}" hidden/>
             <button type='submit'>Удалить стикер</button>
         </form>
+        {% endif %}
     </div>
     {% endfor %}
 
+    {% if user.is_authenticated and user.username == username %}
+        <div class="card">
+            <form name='profile' action="{% url 'profile' %}" method="post" class="form-input" enctype="multipart/form-data">
+                {% csrf_token %}
 
-<form name='profile' action="{% url 'profile' %}" method="post" class="form-input" enctype="multipart/form-data">
-    {% csrf_token %}
-
-    {% if error_message %}
-        {{ error_message }}
+                {% if error_message %}
+                    {{ error_message }}
+                {% endif %}
+                <input name="_method" value="POST" hidden/>
+                {{ form }}
+                <button type='submit'>Add sticker</button>
+            </form>
+        </div>
     {% endif %}
-    <input name="_method" value="POST" hidden/>
-    {{ form }}
-    <button type='submit'>Add sticker</button>
-</form>
 {% endblock %}

@@ -30,7 +30,7 @@ a, a:visited, a:hover{
     padding: 5px;
     font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
     max-height: 8vh;
-    min-height: 8vh;
+    /*min-height: 8vh;*/
 }
 .content {
     background-color: #4F87A2;
@@ -42,7 +42,7 @@ a, a:visited, a:hover{
 .footer {
     background-color: #2B506E;
     max-height: 18vh;
-    min-height: 18vh;
+    min-height: 8vh;
 }
 
 
@@ -51,6 +51,7 @@ h1, h2 ,h3, h4, h5, h6, p, .par{
 }
 
 .par, .header-url, .footer-url, .form-input{
+    overflow: hidden;
     min-width: 150px;
     max-width: 370px;
     max-height: 200px;
@@ -64,5 +65,18 @@ h1, h2 ,h3, h4, h5, h6, p, .par{
 }
 
 img{
-    width: 20vh;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.block{
+    height: 400px;
+    width: 400px;
+    background-color:brown;
+}
+
+.content{
+    justify-content: center;
+    gap: 20px;
 }

@@ -68,7 +68,7 @@ def register(request):
 
     template = loader.get_template('shop/register.html')
     context['form'] = UserRegisterForm()
-    #print(context['form'])
+
     return HttpResponse(template.render(context, request))
 
 
@@ -105,5 +105,18 @@ def profile(request):
 
     context['stickers'] = Stickers.objects.filter(user=request.user)
     context['form'] = CreateStickerForm()
+    context['username'] = request.user.username
+
+    return HttpResponse(template.render(context, request))
+
+
+def prof(request, username):
+    template = loader.get_template('shop/profile.html')
+    context = {}
+
+    user = User.objects.filter(username=username)[0]
+    context['stickers'] = Stickers.objects.filter(user=user)
+    context['form'] = CreateStickerForm()
+    context['username'] = username
 
     return HttpResponse(template.render(context, request))

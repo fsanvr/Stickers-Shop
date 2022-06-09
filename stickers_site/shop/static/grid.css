@@ -1,0 +1,143 @@
+a, a:visited, a:hover{
+    color:#E9E9E9;
+    text-decoration: none;
+}
+* {
+	margin: 0;
+	padding: 0;
+}
+.wrapper {
+	display: grid;
+    grid-template-areas: 
+        'header'
+        'user'
+        'content'
+        'footer';
+	min-height: 100vh;
+    grid-template-rows: 6% minmax(0, 6%) 1fr 6%;
+
+    font-family: 'Comic Sans MS', Verdana, sans-serif;
+}
+.header{
+    grid-area: header;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, 120px);
+    justify-content: center;
+
+    padding: 5px;
+    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+.content{
+    grid-area: content;
+
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    grid-template-rows: minmax(100px, auto);
+    justify-content: center;    
+}
+.footer{
+    grid-area: footer;
+    display: grid;
+    justify-content: center;
+    align-items: center;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+}
+.user{
+    grid-area: user;
+    font-size: calc(28px + (100vw - 320px) / (1920-320));
+    text-align: center;
+}
+
+
+
+h1, h2 ,h3, h4, h5, h6, p, .par{
+    color: #E9E9E9;
+}
+
+.header-url, .footer-url, .form-input{
+    display: grid;
+    justify-content: center;
+    align-content: center;
+}
+.par{
+    display: grid;
+    justify-content: center;
+    text-align: center;
+}
+.form-input{
+    display: grid;
+    justify-content: center;
+}
+
+.case_img{
+    padding-bottom: 100%;
+    overflow: hidden;
+
+    position: relative;
+}
+
+img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    position: absolute;
+    border-radius: 7%;
+}
+
+.card{
+    border-radius: 7%;
+    margin: 16px;
+    padding: 8px;
+    align-self: start;
+}
+
+body{
+    font-size: calc(16px + (100vw - 320px) / (1920-320));
+}
+
+
+.card-title{
+    font-family: 'Impact', Verdana, sans-serif;
+    font-size: calc(18px + (100vw - 320px) / (1920-320));
+}
+.card-price{
+    justify-content: start;
+    padding-left: 5px;
+}
+.card-name{
+    justify-content: end;
+    padding-right: 5px;
+}
+
+
+/*
+############-----COLORS-----############
+*/
+.wrapper{
+    background-color: #4F87A2;
+}
+.header{
+    background-color: #223542;
+}
+.header-url{
+    background-color:none;
+}
+.user{
+    background-color: #2B506E;
+}
+.content{
+    background-color: #4F87A2;
+}
+.form-input{
+    background-color:rgb(138, 51, 159);
+}
+.footer{
+    background-color: #2B506E;
+}
+.footer-url{
+    background-color:none;
+}
+.card{
+    background-color:brown;
+}

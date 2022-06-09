@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     {% load static %}
-    <link rel="stylesheet" href="{% static 'shop/base.css' %}">
+    <link rel="stylesheet" href="{% static 'grid.css' %}">
 
     <title>
         {% block title %}
@@ -18,22 +18,25 @@
     <div class="wrapper">
 
         <div class="header">
-    
-            <h2 class="logo">Sticker Shop</h2>
+            <a href="/" class="logo header-url"><h2>StickerShop</h2></a>
 
-            <nav class="head">
             {% block header_url %}
-                <a href="/products" class="header-url">Товары</a>
-
                 {% if user.is_authenticated %}
                     <a href="/logout" class="header-url">Log out</a>
+                    <a href="/profile" class="header-url">Profile</a>
                 {% else %}
                     <a href="/login" class="header-url">Log in</a>
+                    <a href="/register" class="header-url">Reg</a>
                 {% endif %}
 
             {% endblock %}
-            </nav>
             
+        </div>
+
+        <div class="user">
+            {% block user %}
+    
+            {% endblock %}
         </div>
 
         <div class="content">
@@ -47,7 +50,7 @@
             {% block footer_url %}
             <a href="/about" class="footer-url">О нас</a>
             <a href="/contact" class="footer-url">Обратная связь</a>
-            <a href="https://github.com/fs-anvr/web_project" class="footer-url">Проект на Github</a>
+            <a href="https://github.com/fs-anvr/stickers--site" class="footer-url">Проект на Github</a>
             {% endblock %}
             
 

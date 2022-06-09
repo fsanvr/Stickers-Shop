@@ -7,16 +7,22 @@
 
 
 {% block content %}
-<form name='login' action="{% url 'login' %}" method="post" class="form-input">
-    {% csrf_token %}
+<div class="card">
+    <form name='login' action="{% url 'login' %}" method="post" class="form-input">
+        {% csrf_token %}
 
-    {% if error_message %}
-        {{ error_message }}
-    {% endif %}
+        {% if error_message %}
+            {{ error_message }}
+        {% endif %}
     
-    {{ form }}
-    <button type='submit'>Регистрация</button>
-</form>
+        {{ form }}
+        <button type='submit'>Войти</button>
+    </form>
+</div>
+
+<div class="card">
+    <a href="/register" class="footer-url">Register</a>
+</div>
 {% endblock %}
 
 

@@ -7,28 +7,30 @@
 
 
 {% block content %}
-    <div class="par">
-        Как можно понять из названия, этот сайт предназначен для покупки и продажи стикеров! Здесь можно (пока нельзя)
-        зарегистрироваться и купить чужие стикеры / продать свои.
+    <!--
+    <div class="card">
+        <div class="par">
+            Как можно понять из названия, этот сайт предназначен для покупки и продажи стикеров! Здесь можно (пока нельзя)
+            зарегистрироваться и купить чужие стикеры / продать свои.
+        </div>
     </div>
+    -->
 
     {% for sticker in stickers %}
-    <div class="par">
-        <div class="par">
-            {{ sticker.name }}
-        </div>
-        <div class="par">
-            {{ sticker.price }}
-        </div>
-        <div class="par">
+    <div class="card">
+        <div class="case_img">
             <img src="{{ sticker.image.url }}" />
         </div>
-        <div class="par">
-            {{ sticker.size }}
+        <div class="par card-title">
+            {{ sticker.name }}
         </div>
-        <div class="par">
-            {{ sticker.user }}
+        <div class="par card-price">
+            {{ sticker.price }} руб
+        </div>
+        <div class="par card-name">
+            <a href="/profile/{{ sticker.user }}" class="">{{ sticker.user }}</a>
         </div>
     </div>
     {% endfor %}
+
 {% endblock %}
