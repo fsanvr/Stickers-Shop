@@ -1,0 +1,10 @@
+<div class="par">
+
+    <form class="par" action="{% url 'my_profile' %}" method="post">
+        {% csrf_token %}
+        <input name="_method" value="DELETE" hidden/>
+        <input name="sticker_id" value="{{ sticker.id }}" hidden/>
+        <button type='submit' class="par">Удалить стикер</button>
+    </form>
+
+</div>

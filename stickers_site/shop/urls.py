@@ -17,5 +17,6 @@ urlpatterns = [
     path(route='profile/', view=my_profile, name='my_profile'),
     path(route='profile/<str:username>', view=profile, name='profile'),
     path(route='add_cart/', view=add_cart, name='add_cart'),
+    path(route='del_cart/', view=del_cart, name='del_cart'),
     path(route='cart/', view=cart, name='cart'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

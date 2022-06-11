@@ -1,0 +1,10 @@
+<div class="par card-buy">
+    <form name='add_cart' method='post' action="">
+        {% csrf_token %}
+        <input type="text" name="sticker_id" value="{{ sticker.id }}" hidden/>
+        <input type="number" name="number" min="1" max="99" value="1" class="sticker-number" />
+        <button type="submit">
+            Buy
+        </button>
+    </form>
+</div>

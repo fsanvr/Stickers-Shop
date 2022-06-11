@@ -17,48 +17,27 @@
     -->
 
     {% for sticker in stickers %}
+
     <div class="card">
-        <div class="case_img">
-            <img src="{{ sticker.image.url }}" />
-        </div>
-        <div class="par card-title">
-            {{ sticker.name }}
-        </div>
-        <div class="par card-price">
-            {{ sticker.price }} руб
-        </div>
-        <div class="par card-number">
-            {{ sticker.number }} шт
-        </div>
-        <div class="par card-name">
-            <a href="/profile/{{ sticker.user }}" class="">{{ sticker.user }}</a>
-        </div>
+
+        {% include "shop/base/sticker.html" %}
+
         {% if not user.is_authenticated or user != sticker.user %}
-        <div class="par card-buy">
-            <form name='add_cart' method='post' action="">
-                {% csrf_token %}
-                <input type="text" name="sticker_id" value="{{ sticker.id }}" hidden/>
-                <button type="submit">
-                    Buy
-                </button>
-            </form>
-        </div>
+        
+            {% include "shop/base/sticker_add_cart.html" %}
+
         {% endif %}
+
     </div>
+
     {% endfor %}
 
 {% endblock %}
 
 {% block scripts %}
-    <script>
-        document.onsubmit = event => {
-            event.preventDefault();
-        
-            var XHR = new XMLHttpRequest();
-            XHR.open('POST', '/add_cart/');
 
-            var formData = new FormData(event.target);
-            XHR.send(formData);
-        }
-    </script>
+    {% load static %}
+
+    <script src="{% static 'add_cart.js' %}"></script>
+
 {% endblock %}

@@ -11,6 +11,7 @@ from django.contrib.auth.decorators import login_required
 from .models import *
 from .forms import *
 
+
 # Create your views here.
 
 def index(request):
@@ -128,13 +129,23 @@ def profile(request, username):
 
 
 def add_cart(request):
-    
+
     if 'cart' not in request.session:
-        request.session['cart'] = list()
+        request.session['cart'] = dict()
 
-    sticker= Stickers.objects.filter(pk=request.POST['sticker_id']).first()
+    sticker = Stickers.objects.filter(pk=request.POST['sticker_id']).first()
 
-    request.session['cart'].append(sticker.id)
+    if str(sticker.id) not in request.session['cart']:
+        request.session['cart'][str(sticker.id)] = int(request.POST['number'])
+    else:
+        request.session['cart'][str(sticker.id)] += int(request.POST['number'])
+
+    if request.session['cart'][str(sticker.id)] > 99:
+        request.session['cart'][str(sticker.id)] = 99
+    
+    if request.session['cart'][str(sticker.id)] < 0:
+        request.session['cart'][str(sticker.id)] = 0
+
     request.session.modified = True
 
     print('успешное добавление в корзину')
@@ -144,9 +155,37 @@ def add_cart(request):
 def cart(request):
     template = loader.get_template('shop/cart.html')
     context = {}
+
     if 'cart' in request.session:
-        context['stickers'] = Stickers.objects.filter(pk__in=request.session['cart'])
-        print(len(context['stickers']))
+        stickers = Stickers.objects.filter(pk__in=request.session['cart'].keys())
+
+        if len(stickers) != len(request.session['cart'].keys()):
+            keys = list()
+            for key in request.session['cart'].keys():
+                if not Stickers.objects.filter(pk=key).first():
+                    keys.append(key)
+            for key in keys:
+                del request.session['cart'][key]
+            request.session.modified = True
+
+
+
+        numbers = request.session['cart'].values()
+        context['cart'] = dict(zip(stickers, numbers))
 
 
     return HttpResponse(template.render(context, request))
+
+
+def del_cart(request):
+
+    try:
+        id = request.POST['sticker_id']
+        del request.session['cart'][id]
+        request.session.modified = True
+
+        print('RETIRED')
+    except:
+        print('something wrong...')
+
+    return HttpResponseRedirect(reverse('cart'))

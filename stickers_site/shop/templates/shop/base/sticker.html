@@ -1,47 +1,43 @@
-<div class="card">
+{% if not noParams or 'img' not in noParams %}
 
     <div class="case_img">
         <img src="{{ sticker.image.url }}" />
     </div>
 
+{% endif %}
+
+
+{% if not noParams or 'title' not in noParams %}
+
     <div class="par card-title">
         {{ sticker.name }}
     </div>
+
+{% endif %}
+
+
+{% if not noParams or 'price' not in noParams %}
 
     <div class="par card-price">
         {{ sticker.price }} руб
     </div>
 
+{% endif %}
+
+
+{% if not noParams or 'number' not in noParams %}
+
     <div class="par card-number">
         {{ sticker.number }} шт
     </div>
+
+{% endif %}
+
+
+{% if not noParams or 'name' not in noParams %}
 
     <div class="par card-name">
         <a href="/profile/{{ sticker.user }}" class="">{{ sticker.user }}</a>
     </div>
 
-    {% if user.is_authenticated and user.username == username %}
-
-    <form class="par" action="{% url 'my_profile' %}" method="post">
-        {% csrf_token %}
-        <input name="_method" value="DELETE" hidden/>
-        <input name="sticker_id" value="{{ sticker.id }}" hidden/>
-        <button type='submit' class="par">Удалить стикер</button>
-    </form>
-
-    {% else %}
-
-    <div class="par card-buy">
-
-        <form name='add_cart' method='post' action="">
-            {% csrf_token %}
-            <input type="text" name="sticker_id" value="{{ sticker.id }}" hidden/>
-            <button type="submit">
-                Buy
-            </button>
-        </form>
-        
-    </div>
-
-    {% endif %}
-</div>
+{% endif %}

@@ -7,21 +7,36 @@
 
 
 {% block content %}
-    {% for sticker in stickers %}
+
+    {% if not cart %}
+        Cart is empty
+
+    {% else %}
+
+    {% for sticker, number in cart.items %}
+
     <div class="card">
-        <div class="case_img">
-            <img src="{{ sticker.image.url }}" />
+        
+        {% include "shop/base/sticker.html" with noParams='number' %}
+
+        <div class="par card-number">
+            {{ number }} шт
         </div>
-        <div class="par card-title">
-            {{ sticker.name }}
+
+        <div class="par card-buy">
+            <form name='del_cart' method='post' action="{% url 'del_cart' %}">
+                {% csrf_token %}
+                <input type="text" name="sticker_id" value="{{ sticker.id }}" hidden/>
+                <button type="submit">
+                    Delete
+                </button>
+            </form>
         </div>
-        <div class="par card-price">
-            {{ sticker.price }} руб
-        </div>
-        <div class="par card-name">
-            <a href="/profile/{{ sticker.user }}" class="">{{ sticker.user }}</a>
-        </div>
+
     </div>
+
     {% endfor %}
+
+    {% endif %}
 
 {% endblock %}
