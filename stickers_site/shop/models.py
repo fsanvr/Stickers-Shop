@@ -20,4 +20,5 @@ class Stickers(models.Model):
     price = models.IntegerField()
     image = models.ImageField(upload_to='images')
     size = models.CharField(max_length=30)
+    number = models.IntegerField()
     user = models.ForeignKey(User, on_delete=models.CASCADE, blank=True)

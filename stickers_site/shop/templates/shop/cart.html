@@ -1,0 +1,27 @@
+{% extends 'shop/base.html' %}
+
+
+{% block title.super %}
+    | main
+{% endblock %}
+
+
+{% block content %}
+    {% for sticker in stickers %}
+    <div class="card">
+        <div class="case_img">
+            <img src="{{ sticker.image.url }}" />
+        </div>
+        <div class="par card-title">
+            {{ sticker.name }}
+        </div>
+        <div class="par card-price">
+            {{ sticker.price }} руб
+        </div>
+        <div class="par card-name">
+            <a href="/profile/{{ sticker.user }}" class="">{{ sticker.user }}</a>
+        </div>
+    </div>
+    {% endfor %}
+
+{% endblock %}

@@ -31,18 +31,23 @@ def user_login(request):
 
     
     if request.method == 'POST':
-        form = UserLoginForm(data=request.POST)
-        if form.is_valid():
-            user = form.get_user()
-            login(request, user)
-            print('успешная авторизация')
-            return HttpResponseRedirect(reverse('index'))
+        if request.session.test_cookie_worked():
+            request.session.delete_test_cookie()
+            form = UserLoginForm(data=request.POST)
+            if form.is_valid():
+                user = form.get_user()
+                login(request, user)
+                print('успешная авторизация')
+                return HttpResponseRedirect(reverse('index'))
+            else:
+                context['error_message'] = form.errors
+                print('ошибка авторизации')
         else:
-            context['error_message'] = form.errors
-            print('ошибка авторизации')
+            context['error_message'] = 'Пожалуйста включите cookies и попробуйте снова'
     
     template = loader.get_template('shop/login.html')
     context['form'] = UserLoginForm()
+    request.session.set_test_cookie()
     return HttpResponse(template.render(context, request))
 
 
@@ -73,7 +78,7 @@ def register(request):
 
 
 @login_required
-def profile(request):
+def my_profile(request):
     template = loader.get_template('shop/profile.html')
     context = {}
     
@@ -83,7 +88,7 @@ def profile(request):
         if form.is_valid():
             form.save()
             print('успешное добавление стикера пользователя', request.user.username)
-            return HttpResponseRedirect(reverse('profile'))
+            return HttpResponseRedirect(reverse('my_profile'))
         else:
             context['error_message'] = form.errors
             print(form.errors)
@@ -98,7 +103,7 @@ def profile(request):
             os.remove(sticker.image.path)
             Stickers.objects.filter(pk=id).delete()
             print('TRY')
-            return HttpResponseRedirect(reverse('profile'))
+            return HttpResponseRedirect(reverse('my_profile'))
         except:
             print('FAIL DELETE')
 
@@ -110,7 +115,7 @@ def profile(request):
     return HttpResponse(template.render(context, request))
 
 
-def prof(request, username):
+def profile(request, username):
     template = loader.get_template('shop/profile.html')
     context = {}
 
@@ -118,5 +123,30 @@ def prof(request, username):
     context['stickers'] = Stickers.objects.filter(user=user)
     context['form'] = CreateStickerForm()
     context['username'] = username
+
+    return HttpResponse(template.render(context, request))
+
+
+def add_cart(request):
+    
+    if 'cart' not in request.session:
+        request.session['cart'] = list()
+
+    sticker= Stickers.objects.filter(pk=request.POST['sticker_id']).first()
+
+    request.session['cart'].append(sticker.id)
+    request.session.modified = True
+
+    print('успешное добавление в корзину')
+    return HttpResponseRedirect(request.META.get('HTTP_REFERER','redirect_if_referer_not_found'))
+
+
+def cart(request):
+    template = loader.get_template('shop/cart.html')
+    context = {}
+    if 'cart' in request.session:
+        context['stickers'] = Stickers.objects.filter(pk__in=request.session['cart'])
+        print(len(context['stickers']))
+
 
     return HttpResponse(template.render(context, request))

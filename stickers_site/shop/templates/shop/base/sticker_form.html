@@ -1,0 +1,17 @@
+<div class="card">
+
+    <form name='profile' action="{% url 'my_profile' %}" method="post" class="form-input" enctype="multipart/form-data">
+        {% csrf_token %}
+
+        {% if error_message %}
+            {{ error_message }}
+        {% endif %}
+
+        <input name="_method" value="POST" hidden/>
+
+        {{ form }}
+
+        <button type='submit' class="par">Add sticker</button>
+    </form>
+
+</div>

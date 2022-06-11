@@ -114,6 +114,9 @@ input{
 /*
 ############-----COLORS-----############
 */
+body{
+    background-color: #049CB3;
+}
 .wrapper{
     background-color: #D2BEBF;
 }

@@ -1,4 +1,5 @@
 from dataclasses import fields
+import numbers
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth.models import User
 from django import forms
@@ -56,7 +57,11 @@ class CreateStickerForm(forms.ModelForm):
         label='size',
         widget=forms.TextInput(attrs={'class': 'form-control'})
     )
+    number = forms.IntegerField(
+        label='number',
+        widget=forms.NumberInput(attrs={'class': 'form-control'})
+    )
 
     class Meta:
         model = Stickers
-        fields = ('name', 'price', 'image', 'size')
+        fields = ('name', 'price', 'image', 'size', 'number')
