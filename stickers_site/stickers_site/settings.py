@@ -40,8 +40,9 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
-    'django.contrib.staticfiles',
     'whitenoise',
+    "whitenoise.runserver_nostatic",
+    "django.contrib.staticfiles",
     'shop.apps.ShopConfig',
 ]
 
@@ -128,16 +129,18 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
 
 
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATIC_ROOT = os.path.join(BASE_DIR, 'static', 'static-root')
 STATIC_URL = '/static/'
 
+STATICFILES_DIRS = (
+    os.path.join(BASE_DIR, 'static'),
+)
 
-MEDIA_ROOT = f'{BASE_DIR}/media'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'shop', 'static')
 MEDIA_URL = '/media/'
 
-
-#SHOP_MEDIA_ROOT = MEDIA_ROOT + 'shop/' #сделать переопределение путей
-#SHOP_MEDIA_URL = MEDIA_URL + 'shop/'
+STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
+WHITENOISE_AUTOREFRESH = True
 
 
 # Default primary key field type
