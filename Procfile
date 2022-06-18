@@ -1,1 +1,0 @@
-web: gunicorn stickers_site.stickers_site.wsgi --log-file -
