@@ -167,6 +167,7 @@ def cart(request):
             for key in keys:
                 del request.session['cart'][key]
             request.session.modified = True
+            
 
 
 
