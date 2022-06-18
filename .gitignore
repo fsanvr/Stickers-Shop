@@ -1,4 +1,4 @@
-settings.py
+#settings.py
 venv
 db.sqlite3
 media
