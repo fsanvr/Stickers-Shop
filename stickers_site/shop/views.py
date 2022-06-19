@@ -102,12 +102,15 @@ def my_profile(request):
         print(sticker.image.path)
         try:
             os.remove(sticker.image.path)
-            Stickers.objects.filter(pk=id).delete()
-            print('TRY')
-            return HttpResponseRedirect(reverse('my_profile'))
         except:
-            print('FAIL DELETE')
-
+            pass
+        try:
+            Stickers.objects.filter(pk=id).delete()
+        except:
+            pass
+        
+        return HttpResponseRedirect(reverse('my_profile'))
+        
 
     context['stickers'] = Stickers.objects.filter(user=request.user)
     context['form'] = CreateStickerForm()
