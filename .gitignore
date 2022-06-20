@@ -1,5 +1,7 @@
 #settings.py
+env
 venv
 db.sqlite3
 media
 images
+__pycache__
