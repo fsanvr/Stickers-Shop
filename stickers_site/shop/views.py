@@ -1,21 +1,14 @@
-#from re import template
-#from django.shortcuts import render
-import os
-from django.template import loader
 from django.http import HttpResponse, HttpResponseRedirect
-from django.urls import reverse
-from django.contrib.auth import login, logout
 from django.contrib.auth.decorators import login_required
-
-
+from django.contrib.auth import login, logout
+from django.template import loader
+from django.urls import reverse
 from .models import *
 from .forms import *
+import os
 
-
-# Create your views here.
 
 def index(request):
-    #print(request)
     template = loader.get_template('shop/index.html')
     context = {}
 
@@ -27,10 +20,8 @@ def user_login(request):
     context = {}
 
     if request.user.is_authenticated:
-        print('ты уже вошёл, молодец', request.user.username)
         return HttpResponseRedirect(reverse('index'))
 
-    
     if request.method == 'POST':
         if request.session.test_cookie_worked():
             request.session.delete_test_cookie()
@@ -38,11 +29,9 @@ def user_login(request):
             if form.is_valid():
                 user = form.get_user()
                 login(request, user)
-                print('успешная авторизация')
                 return HttpResponseRedirect(reverse('index'))
             else:
                 context['error_message'] = form.errors
-                print('ошибка авторизации')
         else:
             context['error_message'] = 'Пожалуйста включите cookies и попробуйте снова'
     
@@ -66,15 +55,12 @@ def register(request):
         if form.is_valid():
             user = form.save()
             login(request, user)
-            print('успешная регистрация')
             return HttpResponseRedirect(reverse('login'))
         else:
             context['error_message'] = form.errors
-            print('ошибка регистрации')
 
     template = loader.get_template('shop/register.html')
     context['form'] = UserRegisterForm()
-
     return HttpResponse(template.render(context, request))
 
 
@@ -88,13 +74,10 @@ def my_profile(request):
         form.instance.user = request.user
         if form.is_valid():
             form.save()
-            print('успешное добавление стикера пользователя', request.user.username)
             return HttpResponseRedirect(reverse('my_profile'))
         else:
             context['error_message'] = form.errors
-            print(form.errors)
 
-    
     elif request.method == 'POST' and request.POST['_method'] == 'DELETE':
         id = request.POST['sticker_id']
         sticker = (Stickers.objects.filter(pk=id).all())[0]
@@ -111,11 +94,9 @@ def my_profile(request):
         
         return HttpResponseRedirect(reverse('my_profile'))
         
-
     context['stickers'] = Stickers.objects.filter(user=request.user)
     context['form'] = CreateStickerForm()
     context['username'] = request.user.username
-
     return HttpResponse(template.render(context, request))
 
 
@@ -132,7 +113,6 @@ def profile(request, username):
 
 
 def add_cart(request):
-
     if 'cart' not in request.session:
         request.session['cart'] = dict()
 
@@ -150,8 +130,6 @@ def add_cart(request):
         request.session['cart'][str(sticker.id)] = 0
 
     request.session.modified = True
-
-    print('успешное добавление в корзину')
     return HttpResponseRedirect(request.META.get('HTTP_REFERER','redirect_if_referer_not_found'))
 
 
@@ -171,25 +149,18 @@ def cart(request):
                 del request.session['cart'][key]
             request.session.modified = True
             
-
-
-
         numbers = request.session['cart'].values()
         context['cart'] = dict(zip(stickers, numbers))
-
 
     return HttpResponse(template.render(context, request))
 
 
 def del_cart(request):
-
     try:
         id = request.POST['sticker_id']
         del request.session['cart'][id]
         request.session.modified = True
-
-        print('RETIRED')
     except:
-        print('something wrong...')
+        pass
 
     return HttpResponseRedirect(reverse('cart'))

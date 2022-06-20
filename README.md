@@ -50,4 +50,6 @@ after these steps, you can start the local server and have already launched the 
 
 # at the end
 
-this project should be considered precisely as mastering the basic principles of web development, a lot has not been completed or not done at all, but... I think everything will be fine :D
+this project should be considered precisely as mastering the basic principles of web development, a lot has not been completed or not done at all (for example, heroku deletes pictures when going into sleep mode, but I haven't fixed it), but... I think everything will be fine :D
+
+I am happy already from the fact that you have entered this repository!

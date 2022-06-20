@@ -1,18 +1,5 @@
-from django.db import models
 from django.contrib.auth.models import User
-
-#from stickers_site.settings import MEDIA_ROOT
-
-# Create your models here.
-
-#class Profile(models.Model):
-#    username = models.CharField(max_length=30, unique=True)
-#    email = models.EmailField(max_length=30, unique=True)
-#    password = models.CharField(max_length=500)
-#    data = models.DateField(auto_now_add=True)
-#
-#    def __str__(self):
-#        return self.username
+from django.db import models
 
 
 class Stickers(models.Model):

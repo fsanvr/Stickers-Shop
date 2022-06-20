@@ -1,13 +1,9 @@
-from audioop import add
-import imp
-from operator import index
+from django.conf.urls.static import static
+from django.conf import settings
 from django.urls import path
-
+from operator import index
 from .views import *
 
-
-from django.conf import settings
-from django.conf.urls.static import static
 
 urlpatterns = [
     path(route='', view=index, name='index'),
