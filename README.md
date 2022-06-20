@@ -24,6 +24,8 @@ on your computer, it should be installed:
 open the folder where you want to download the project and follow these steps:
 
 ```bash
+git clone https://github.com/fs-anvr/stickers--site.git
+
 python -m venv env
 env\Scripts\activate
 
