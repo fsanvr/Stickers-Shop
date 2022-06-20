@@ -2,7 +2,7 @@
 
 # project description
 
-This project is written as part of a course work, the goal is to learn frontend and backend development at a basic level. The site is a sticker store, with some flaws (in particular, it is impossible to buy something in this store)
+this project is written as part of a course work, the goal is to learn frontend and backend development at a basic level. the site is a sticker store, with some flaws (in particular, it is impossible to buy something in this store)
 
 # used in the project
 
@@ -21,7 +21,7 @@ on your computer, it should be installed:
 * Python 3.x.x
 * Heroku CLI (and account on [heroku](https://heroku.com/))
 
-Open the folder where you want to download the project and follow these steps:
+open the folder where you want to download the project and follow these steps:
 
 ```bash
 python -m venv env
@@ -46,6 +46,8 @@ heroku run python manage.py createsuperuser
 heroku open
 ```
 
+after these steps, you can start the local server and have already launched the site
+
 # at the end
 
-this project should be considered precisely as mastering the basic principles of web development, a lot has not been completed or not done at all, but... I think everything will be fine
+this project should be considered precisely as mastering the basic principles of web development, a lot has not been completed or not done at all, but... I think everything will be fine :D
