@@ -36,6 +36,7 @@ pip install whitenoise
 
 
 cd stickers_site
+heroku create <or your name>
 git init
 heroku git:remote -a stickers_site <or your name>
 git add .
